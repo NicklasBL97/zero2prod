@@ -4,7 +4,7 @@ use chrono::Utc;
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::domain::{NewSubscriber, SubscriberName, SubscriberEmail};
+use crate::domain::{NewSubscriber, SubscriberEmail, SubscriberName};
 
 #[derive(Debug, serde::Deserialize)]
 pub struct FormData {
@@ -46,7 +46,6 @@ pub fn parse_subscriber(form: FormData) -> Result<NewSubscriber, String> {
     let email = SubscriberEmail::parse(form.email)?;
     Ok(NewSubscriber { email, name })
 }
-    
 
 #[tracing::instrument(
     name = "Saving new subscriber details in the database",
